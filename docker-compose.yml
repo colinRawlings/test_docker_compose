@@ -1,0 +1,12 @@
+version: '2.4'
+services:
+  python_runner:
+    image: python_runner
+    command: python c:/code/main.py
+    environment: 
+        - TEST_BIN_PATH=c:/test_bins/test_runner.exe
+        - TEST_RESULTS_PATH=c:/results
+    volumes:
+      - ./python_runner:c:/code
+      - ./test_bins:c:/test_bins
+      - ./results:c:/results
