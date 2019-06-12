@@ -12,7 +12,7 @@ if __name__ == "__main__":
     junit_results_filepath = os.path.join(results_folderpath, "results.xml")
     html_results_filepath = os.path.join(results_folderpath, "results.html")
 
-    # results
+    # results folder
 
     if not os.path.isdir(results_folderpath):
         os.mkdir(results_folderpath)
@@ -23,8 +23,10 @@ if __name__ == "__main__":
 
     # execute
 
-    sp.run([bin_runner_path, '--log_format=JUNIT', '--log_level=all',
+    result = sp.run([bin_runner_path, '--log_format=JUNIT', '--log_level=all',
             '--run_test=liba_suite/trivial_suite', f'--log_sink={junit_results_filepath}'])
+
+    print(f"Test runner completed with exit code: {result.returncode}")
 
     result = sp.run([XUNIT_BIN_NAME,
             f'--results={results_folderpath}', f'--output={html_results_filepath}'], shell=True)
